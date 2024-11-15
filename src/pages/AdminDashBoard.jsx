@@ -104,35 +104,38 @@ export default function AdminDashboard() {
   const handleRouteSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = isEditingRoute 
-        ? `http://localhost:8083/api/routes/updateRoute/${routeFormData.routeId}`
-        : 'http://localhost:8083/api/routes/addRoute';
-      
-      const response = await fetch(url, {
-        method: isEditingRoute ? 'PUT' : 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(routeFormData),
-      });
+        const url = isEditingRoute 
+            ? `http://localhost:8083/api/routes/${routeFormData.routeId}` 
+            : 'http://localhost:8083/api/routes/addRoute';
+        
+        const response = await fetch(url, {
+            method: isEditingRoute ? 'PUT' : 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(routeFormData),
+        });
 
-      if (!response.ok) throw new Error(`Failed to ${isEditingRoute ? 'update' : 'save'} route`);
-      
-      toast.success(`Route ${isEditingRoute ? 'updated' : 'added'} successfully!`);
-      setShowRouteForm(false);
-      setIsEditingRoute(false);
-      setRouteFormData({
-        routeId: '',
-        routeSource: '',
-        routeDestination: '',
-        routeStops: []
-      });
-      await fetchRoutes();
+        if (!response.ok) {
+            throw new Error(`Failed to ${isEditingRoute ? 'update' : 'save'} route`);
+        }
+        
+        toast.success(`Route ${isEditingRoute ? 'updated' : 'added'} successfully!`);
+        setShowRouteForm(false);
+        setIsEditingRoute(false);
+        setRouteFormData({
+            routeId: '',
+            routeSource: '',
+            routeDestination: '',
+            routeStops: [],
+        });
+        await fetchRoutes();
     } catch (error) {
-      toast.error(`Error ${isEditingRoute ? 'updating' : 'adding'} route`);
-      console.error(`Error ${isEditingRoute ? 'updating' : 'saving'} route:`, error);
+        toast.error(`Error ${isEditingRoute ? 'updating' : 'adding'} route`);
+        console.error(`Error ${isEditingRoute ? 'updating' : 'saving'} route:`, error);
     }
-  };
+};
+
 
   const handleAssignRouteSubmit = async (e) => {
     e.preventDefault();
