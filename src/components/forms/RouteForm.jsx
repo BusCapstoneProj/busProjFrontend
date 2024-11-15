@@ -1,6 +1,7 @@
+import React from 'react';
 import Button from '../Button';
 
-export default function RouteForm({ onSubmit, formData, setFormData }) {
+export default function RouteForm({ onSubmit, formData, setFormData, onCancel }) {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div>
@@ -47,7 +48,14 @@ export default function RouteForm({ onSubmit, formData, setFormData }) {
           required
         />
       </div>
-      <Button type="submit" fullWidth>Add Route</Button>
+      <div className="flex justify-end space-x-4">
+        <Button type="button" variant="secondary" onClick={onCancel}>
+          Cancel
+        </Button>
+        <Button type="submit" variant="primary">
+          {formData.routeId ? 'Update Route' : 'Add Route'}
+        </Button>
+      </div>
     </form>
   );
 }

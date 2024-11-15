@@ -1,0 +1,111 @@
+.admin-dashboard {
+  padding: 2rem;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.options {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.options button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background-color: #fff;
+  color: #1e40af;
+  border: 2px solid #1e40af;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.options button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.options button.active {
+  background-color: #1e40af;
+  color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+}
+
+th {
+  background-color: #1e40af;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
+tr:hover {
+  background-color: #f1f5f9;
+}
+
+.map-form-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+.map-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 450px;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+.map-form form > div {
+  margin-bottom: 1.5rem;
+}
+
+.map-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.map-form input,
+.map-form select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.map-form input:focus,
+.map-form select:focus {
+  border-color: #1e40af;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(30,64,175,0.1);
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
