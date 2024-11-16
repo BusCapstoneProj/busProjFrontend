@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 
 
 
-export default function AdminDashboard() {
+export default function AdminDashBoard() {
   const [activeTab, setActiveTab] = useState('buses');
   const [buses, setBuses] = useState([]);
   const [routes, setRoutes] = useState([]);
@@ -61,7 +61,108 @@ export default function AdminDashboard() {
       const data = await response.json();
       setRoutes(data);
     } catch (error) {
-      toast.error('Failed to fetch routes');
+      // Add custom styles for the error message container
+      const errorContainerStyle = {
+        padding: "20px",
+        background: "linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%)",
+        borderRadius: "15px",
+        margin: "20px auto",
+        maxWidth: "500px",
+        boxShadow: "0 10px 25px rgba(255, 71, 87, 0.2)",
+        animation: "slideIn 0.5s ease, pulse 2s infinite",
+        border: "3px solid rgba(255,255,255,0.2)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        transition: "all 0.3s ease",
+        transform: "translateY(-5px)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)"
+      };
+
+      // Create and append error container to DOM
+      const errorContainer = document.createElement('div');
+      Object.assign(errorContainer.style, errorContainerStyle);
+      
+      // Add error message with styling and animation
+      errorContainer.innerHTML = `
+        <style>
+          @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+          }
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+          }
+          .error-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            animation: rotate 1s ease;
+          }
+          @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+        </style>
+        <div class="error-icon">⚠️</div>
+        <div style="
+          color: white;
+          font-size: 24px;
+          font-weight: bold;
+          text-align: center;
+          margin-bottom: 15px;
+          font-family: 'Poppins', sans-serif;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        ">
+          Failed to fetch routes
+        </div>
+        <div style="
+          color: rgba(255,255,255,0.9);
+          font-size: 16px;
+          text-align: center;
+          font-family: 'Poppins', sans-serif;
+          line-height: 1.5;
+          max-width: 80%;
+        ">
+          Unable to load route information. Please try again later or contact support.
+        </div>
+      `;
+
+      // Add to page temporarily with fade out animation
+      document.body.appendChild(errorContainer);
+      setTimeout(() => {
+        errorContainer.style.opacity = '0';
+        errorContainer.style.transform = 'translateY(20px)';
+        setTimeout(() => errorContainer.remove(), 500);
+      }, 4500);
+
+      // Enhanced toast notification
+      toast.error('Failed to fetch routes', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        style: {
+          background: "linear-gradient(135deg, #ff416c, #ff4b2b)",
+          borderRadius: "15px",
+          padding: "20px",
+          color: "white",
+          fontSize: "16px",
+          fontWeight: "600",
+          boxShadow: "0 8px 20px rgba(255, 71, 87, 0.25)",
+          border: "2px solid rgba(255,255,255,0.1)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)"
+        }
+      });
+
       console.error('Error fetching routes:', error);
     }
   }, []);
@@ -213,7 +314,7 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-8">
       <div className="text-center text-white space-y-4">
-        <h1 className="text-5xl font-bold">Admin Dashboard</h1>
+        <h1 className="text-5xl font-bold">Admin DashBoard</h1>
         <p className="text-xl">Manage buses and routes</p>
       </div>
 
